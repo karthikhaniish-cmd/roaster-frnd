@@ -1,0 +1,6 @@
+{
+  "name": "AI Roast Generator",
+  "description": "Generate funny, playful roasts from user-provided text in English, Tamil, and Tanglish.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

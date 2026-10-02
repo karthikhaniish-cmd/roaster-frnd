@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Roast Generator 😂</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background-glow"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-area">
+      <span class="logo-emoji">😂</span>
+      <div>
+        <h1 class="logo-title">AI Roast Generator</h1>
+        <p class="logo-tagline">Give me a target. I'll bring the jokes.</p>
+      </div>
+    </div>
+    <nav class="nav-links">
+      <button class="nav-btn active" data-tab="roast-tab">Roast</button>
+      <button class="nav-btn" data-tab="history-tab">History</button>
+      <button class="nav-btn" data-tab="about-tab">About</button>
+    </nav>
+    {% if demo_mode %}
+    <div class="demo-badge" title="Running in Demo Mode with curated roasts">⚡ Demo Mode</div>
+    {% endif %}
+  </header>
+
+  <main class="container">
+    <!-- TAB 1: ROAST GENERATOR -->
+    <section id="roast-tab" class="tab-content active">
+      <!-- Hero -->
+      <div class="hero">
+        <h2 class="hero-title">Ready to Get Roasted? 😂</h2>
+        <p class="hero-sub">Drop a name, situation, or description. Let AI cook the roast.</p>
+      </div>
+
+      <!-- Input Card -->
+      <div class="card glass-card" id="input-card">
+        <div class="card-header">
+          <h3>🎯 Configure The Roast</h3>
+          <button type="button" class="btn-random" id="btn-random">🎲 Random Roast</button>
+        </div>
+
+        <form id="roast-form">
+          <div class="form-group">
+            <label for="target-name">Target Name / Nickname</label>
+            <input type="text" id="target-name" placeholder="e.g. Harish" class="form-control" required>
+          </div>
+
+          <div class="form-group">
+            <label for="target-desc">Tell us about them / Situation</label>
+            <textarea id="target-desc" rows="3" placeholder="Always late to class, thinks he's a great dancer, spends 5 hours gaming…" class="form-control" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="roast-lang">Language</label>
+              <select id="roast-lang" class="form-control">
+                <option value="Tanglish" selected>🔥 Tanglish (Casual Tamil in English)</option>
+                <option value="English">🇺🇸 English</option>
+                <option value="Tamil">🇮🇳 Tamil (தமிழ்)</option>
+              </select>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="roast-style">Roast Style</label>
+              <select id="roast-style" class="form-control">
+                <option value="Funny" selected>😂 Funny</option>
+                <option value="Sarcastic">😏 Sarcastic</option>
+                <option value="Clever">🧠 Clever</option>
+                <option value="Meme">💀 Meme</option>
+                <option value="College Friend">🤝 College Friend</option>
+                <option value="One-Liner">⚡ One-Liner</option>
+                <option value="Stand-up Comedy">🎤 Stand-up Comedy</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Roast Level</label>
+            <div class="level-cards">
+              <label class="level-card">
+                <input type="radio" name="level" value="Friendly">
+                <div class="card-inner">
+                  <span class="level-icon">🔥</span>
+                  <div class="level-title">Friendly</div>
+                  <div class="level-desc">Just a little spicy</div>
+                </div>
+              </label>
+
+              <label class="level-card active">
+                <input type="radio" name="level" value="Savage" checked>
+                <div class="card-inner">
+                  <span class="level-icon">🌶️</span>
+                  <div class="level-title">Savage</div>
+                  <div class="level-desc">Friendship may survive</div>
+                </div>
+              </label>
+
+              <label class="level-card">
+                <input type="radio" name="level" value="Nuclear">
+                <div class="card-inner">
+                  <span class="level-icon">☢️</span>
+                  <div class="level-title">Nuclear</div>
+                  <div class="level-desc">Proceed at your own risk</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-roast" id="btn-submit">🔥 ROAST ME</button>
+        </form>
+      </div>
+
+      <!-- Cooking Loader -->
+      <div class="card glass-card loader-card" id="loader-card" style="display: none;">
+        <div class="flame-animation">🔥</div>
+        <h3>AI is cooking your roast... 🔥</h3>
+        <p id="loader-status" class="loader-status">Adding extra spice and comedic seasoning...</p>
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Result Card -->
+      <div class="card glass-card result-card" id="result-card" style="display: none;">
+        <div class="result-header">
+          <h3 id="result-title">😂 HARISH GETS ROASTED</h3>
+          <div class="variation-badge" id="variation-counter">1/3</div>
+        </div>
+
+        <div class="result-tags" id="result-tags">
+          <span class="tag tag-level" id="tag-level">🌶️ Savage</span>
+          <span class="tag tag-lang" id="tag-lang">🔥 Tanglish</span>
+          <span class="tag tag-style" id="tag-style">😂 Funny</span>
+        </div>
+
+        <div class="roast-box">
+          <span class="quote-mark">“</span>
+          <p class="roast-text" id="roast-text"></p>
+          <span class="quote-mark right">”</span>
+        </div>
+
+        <div class="variation-buttons" id="variation-chips">
+          <button class="chip-btn active" data-index="0">Roast 1</button>
+          <button class="chip-btn" data-index="1">Roast 2</button>
+          <button class="chip-btn" data-index="2">Roast 3</button>
+        </div>
+
+        <div class="action-buttons">
+          <button type="button" class="action-btn" id="btn-copy">📋 Copy Roast</button>
+          <button type="button" class="action-btn" id="btn-share">📤 Share</button>
+          <button type="button" class="action-btn" id="btn-save">❤️ Save</button>
+        </div>
+
+        <div class="footer-buttons">
+          <button type="button" class="btn-secondary" id="btn-again">🔥 Roast Again</button>
+          <button type="button" class="btn-primary" id="btn-generate-more">⚡ Generate 3 More</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: HISTORY -->
+    <section id="history-tab" class="tab-content">
+      <div class="card glass-card">
+        <div class="card-header">
+          <h3>📜 Roast History</h3>
+          <button type="button" class="btn-clear" id="btn-clear-history">Clear All</button>
+        </div>
+        <div id="history-list" class="history-list"></div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ABOUT & SAFETY -->
+    <section id="about-tab" class="tab-content">
+      <div class="card glass-card">
+        <h3>🛡️ Safety & Humor Philosophy</h3>
+        <p>This app strictly creates playful banter for friends and squads — never malicious harassment.</p>
+        <ul>
+          <li>Zero hate speech, slurs, threats, sexual content, or personal doxxing.</li>
+          <li>Never targets protected characteristics (race, religion, gender, disability).</li>
+          <li>Focuses exclusively on harmless quirks: bad Wi-Fi, being late, sleep schedules, procrastination, exam prep, and gaming!</li>
+        </ul>
+      </div>
+
+      <div class="card glass-card">
+        <h3>🔥 Tamil & Tanglish Mastery</h3>
+        <p>Understands Tamil written in English alphabet and replies with genuine college slang (Dei, Machi, scene podra, attendance percentage, vibe)!</p>
+      </div>
+    </main>
+
+  <div id="toast" class="toast">Roast copied! 😂</div>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Flame Outer Base -->
+    <path
+        android:pathData="M54,18 C52,26 44,32 38,38 C30,46 26,56 27,67 C28,81 40,92 54,92 C68,92 80,81 81,67 C82,56 78,46 70,38 C64,32 56,26 54,18 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="18"
+                android:endX="54"
+                android:endY="92"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FFF97316" />
+                <item android:offset="0.5" android:color="#FFFF3D00" />
+                <item android:offset="1.0" android:color="#FFA855F7" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Inner Flame Tongue / Warmth -->
+    <path
+        android:pathData="M54,34 C52,40 46,45 42,49 C37,55 35,62 36,69 C37,79 45,86 54,86 C63,86 71,79 72,69 C73,62 71,55 66,49 C62,45 56,40 54,34 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="54"
+                android:startY="34"
+                android:endX="54"
+                android:endY="86"
+                android:type="linear">
+                <item android:offset="0.0" android:color="#FFFFD54F" />
+                <item android:offset="1.0" android:color="#FFFF9100" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <!-- Laughing Eyes: Left Eye (Squint arc) -->
+    <path
+        android:pathData="M44,57 C46,54 50,54 51,57"
+        android:strokeColor="#1E0D36"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <!-- Laughing Eyes: Right Eye (Squint arc) -->
+    <path
+        android:pathData="M57,57 C58,54 62,54 64,57"
+        android:strokeColor="#1E0D36"
+        android:strokeWidth="3.2"
+        android:strokeLineCap="round"
+        android:fillColor="#00000000" />
+    <!-- Big Laughing Open Mouth -->
+    <path
+        android:pathData="M43,64 C43,73 65,73 65,64 Z"
+        android:fillColor="#1E0D36" />
+    <!-- Tongue in Mouth -->
+    <path
+        android:pathData="M49,69 C51,72 57,72 59,69 C57,67 51,67 49,69 Z"
+        android:fillColor="#FF5252" />
+    <!-- Tear of Joy (Left) -->
+    <path
+        android:pathData="M39,59 C38,62 36,63 36,65 C36,67 37.5,68.5 39.5,68.5 C41.5,68.5 43,67 43,65 C43,63 40,60 39,59 Z"
+        android:fillColor="#00E5FF" />
+</vector>
